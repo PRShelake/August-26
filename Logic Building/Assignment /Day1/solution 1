@@ -1,1 +1,16 @@
 // Write a Java program that checks if a predefined number is positive using an if-else statement and prints the appropriate message.//
+class SolutionOne {
+    public static void main(String[] args) {
+        // Predefined number to check
+        int number = 25; 
+
+        // If-else statement to check if the number is positive
+        if (number > 0) {
+            System.out.println("The number " + number + " is positive.");
+        } else if (number < 0) {
+            System.out.println("The number " + number + " is negative.");
+        } else {
+            System.out.println("The number is zero.");
+        }
+    }
+}
