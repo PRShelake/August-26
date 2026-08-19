@@ -1,2 +1,14 @@
 // Write a Java program that displays a "Good Morning" message if the
 predefined time is between 5 AM and 12 PM. Use an if statement to implement the logic.//
+
+public class SolutionFour {
+    public static void main(String[] args) {
+        // Predefined time using a 24-hour format (e.g., 9 represents 9:00 AM)
+        int currentHour = 9; 
+
+        // Check if the hour is between 5 AM (inclusive) and 12 PM (inclusive)
+        if (currentHour >= 5 && currentHour <= 12) {
+            System.out.println("Good Morning");
+        }
+    }
+}
