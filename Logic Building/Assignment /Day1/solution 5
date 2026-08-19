@@ -1,1 +1,15 @@
 // Write a Java program that calculates the area of a square using the formula area = side * side. Use a predefined side length. //
+
+public class SolutionFive {
+    public static void main(String[] args) {
+        // Predefined side length of the square
+        double side = 5.5;
+
+        // Formula to calculate the area
+        double area = side * side;
+
+        // Printing the result to the console
+        System.out.println("The side length of the square is: " + side);
+        System.out.println("The area of the square is: " + area);
+    }
+}
