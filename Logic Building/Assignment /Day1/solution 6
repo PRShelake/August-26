@@ -1,1 +1,17 @@
 // Write a Java program that calculates the area of a rectangle using the formula area = length * width. Use predefined values for length and width.//
+
+public class SolutionSix {
+    public static void main(String[] args) {
+        // Predefined values for length and width
+        double length = 5.5;
+        double width = 4.0;
+
+        // Formula: area = length * width
+        double area = length * width;
+
+        // Displaying the results
+        System.out.println("Length of Rectangle: " + length);
+        System.out.println("Width of Rectangle: " + width);
+        System.out.println("Calculated Area: " + area);
+    }
+}
