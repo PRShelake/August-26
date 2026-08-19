@@ -1,1 +1,17 @@
 // Write a Java program that checks if a predefined number is negative using an if-else statement and displays the result.//
+
+public class SolutionTwo {
+    public static void main(String[] args) {
+        // Predefined number to check
+        int number = -15;
+
+        // If-else condition to check if the number is less than zero
+        if (number < 0) {
+            System.out.println(number + " is a negative number.");
+        } else if (number > 0) {
+            System.out.println(number + " is a positive number.");
+        } else {
+            System.out.println("The number is zero.");
+        }
+    }
+}
