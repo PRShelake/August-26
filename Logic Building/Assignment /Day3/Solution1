@@ -1,1 +1,44 @@
-D
+Problem 1: Sum of Two Numbers (Using a Method)
+Problem Statement:
+Write a Java program that includes a method to calculate the sum of two numbers.
+1. Create a method sumOfTwoNumbers() that takes two integers as parameters, calculates their sum,
+and returns the result.
+2. In the main method, use the Scanner class to prompt the user to enter two integers.
+3. Pass the user inputs to the sumOfTwoNumbers() method and print the sum.
+Sample Input:
+Enter first number: 15
+Enter second number: 25
+Expected Output:
+The sum of 15 and 25 is 40.
+
+CODE:-
+
+import java.util.Scanner;
+
+public class SumOfTwoNumbers {
+
+    // Method to calculate the sum
+    public static int sumOfTwoNumbers(int a, int b) {
+        return a + b;
+    }
+
+    public static void main(String[] args) {
+
+        Scanner sc = new Scanner(System.in);
+
+        // Taking input from user
+        System.out.print("Enter first number: ");
+        int num1 = sc.nextInt();
+
+        System.out.print("Enter second number: ");
+        int num2 = sc.nextInt();
+
+        // Calling the method
+        int sum = sumOfTwoNumbers(num1, num2);
+
+        // Printing result
+        System.out.println("The sum of " + num1 + " and " + num2 + " is " + sum);
+
+        sc.close();
+    }
+}
