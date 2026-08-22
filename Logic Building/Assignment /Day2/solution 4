@@ -1,1 +1,41 @@
+Problem 4: Identify the Values of Uninitialized Variables
+Scenario:
+You are working on a program that handles different data types. Your manager has asked you to quickly
+check the values of various variables, but you’re in a rush and forget to initialize them. As you go through
+the code, you expect some values to show up, but Java has something else in mind. Your task is to fix the
+issue and ensure the variables hold proper values.
+Instructions:
+1. Declare the following variables:
+byte a;
+short b;
+int c;
+long d;
+float e;
+double f;
+char g;
+boolean h;
+2. Print out their values.
 
+
+public class SolutionFour{
+    public static void main(String[] args) {
+
+        byte a = 0;
+        short b = 0;
+        int c = 0;
+        long d = 0L;
+        float e = 0.0f;
+        double f = 0.0;
+        char g = '\0';
+        boolean h = false;
+
+        System.out.println("byte a = " + a);
+        System.out.println("short b = " + b);
+        System.out.println("int c = " + c);
+        System.out.println("long d = " + d);
+        System.out.println("float e = " + e);
+        System.out.println("double f = " + f);
+        System.out.println("char g = " + g);
+        System.out.println("boolean h = " + h);
+    }
+}
