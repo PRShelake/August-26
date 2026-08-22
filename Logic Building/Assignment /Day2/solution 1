@@ -1,1 +1,51 @@
+Problem 1: Grade Evaluation System
 
+Problem Statement:
+Write a Java program that calculates the average marks of a student and determines the grade based on the
+
+following criteria:
+Grade A: Average marks ≥ 90
+Grade B: Average marks between 70 and 89
+Grade C: Average marks between 50 and 69
+Grade D: Average marks between 30 and 49
+Fail: Average marks < 30
+
+Predefined Values (Try with different values as well):
+● Marks in Maths = 80
+● Marks in Science = 85
+● Marks in History = 90
+
+Expected Output:
+Average Marks: 85
+Grade: B
+
+
+
+public class GradeEvaluation {
+    public static void main(String[] args) {
+
+        // Predefined marks
+        int maths = 80;
+        int science = 85;
+        int history = 90;
+
+        // Calculate average
+        double average = (maths + science + history) / 3.0;
+
+        // Display average
+        System.out.println("Average Marks: " + (int) average);
+
+        // Determine grade
+        if (average >= 90) {
+            System.out.println("Grade: A");
+        } else if (average >= 70) {
+            System.out.println("Grade: B");
+        } else if (average >= 50) {
+            System.out.println("Grade: C");
+        } else if (average >= 30) {
+            System.out.println("Grade: D");
+        } else {
+            System.out.println("Fail");
+        }
+    }
+}
