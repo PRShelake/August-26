@@ -1,0 +1,124 @@
+#include<iostream>
+#include<cmath>
+using namespace std;
+
+double computeRMS(double* signal, int n){
+    // Returns sqrt( sum of (each element squared) / n )
+    
+    double sum= 0;
+    for(int i = 0;i<n;i++){
+        double square = (*(signal+i)) * (*(signal+i));
+        sum += square;
+    }
+
+    double avg = sum / n;
+    return sqrt(avg);
+
+
+}
+
+void normalise(double* signal, int n){
+    // Divides every element by the max absolute value in the signalay (in-place)
+
+    double max = fabs(*(signal));
+    for(int i = 0;i<n;i++){
+        if(max < fabs(*(signal+i))){
+            max = fabs(*(signal+i));
+        }
+    }
+
+    cout<<endl;
+    for(int i = 0;i<n;i++){
+        *(signal+i) /= max;
+    }
+
+    cout<<endl;
+    
+    
+}
+
+int countZeroCrossings(double* signal, int n){
+    // Returns count of positions where adjacent elements have opposite signs
+
+    int count = 0;
+
+    for(int i = 1;i<n;i++){
+        if( (*(signal+i-1) > 0 && *(signal+i) < 0 )   || 
+            (*(signal+i-1) < 0 && *(signal+i) > 0)    ){
+
+                count++;
+        
+            }
+    }
+
+    return count;
+
+}
+
+void applyGain(double* signal, int n, double gainFactor){
+    // Multiplies every element by gainFactor (in-place)
+
+    for(int i = 0;i<n;i++){
+        *(signal+i) *= gainFactor;
+    }
+    cout<<endl;
+
+}
+
+int main(){
+
+    int n;
+    cout<<"Enter the size of the signal"<<endl;
+    cin>>n;
+
+
+    double signal[n];
+
+    for(int i = 0;i<n;i++){
+        cin>>*(signal+i);
+    }
+
+     double gainFactor;
+    cout<<"Enter the gainFactor"<<endl;
+    cin>>gainFactor; 
+
+     //COMPUTE RMS
+    cout<<endl;
+    double rms = computeRMS(signal,n);
+    cout<< "RMS : "<< rms <<endl;
+
+      
+    //ZEROS
+    int count = countZeroCrossings(signal,n);
+    cout << "Count Zero Crossings: "<<count;
+    cout<<endl;
+    
+  
+
+   
+    //Normalise
+    cout<<endl;
+    cout<< "------Before Normalise------"<<endl;
+    for(int i = 0;i<n;i++){
+        cout<<*(signal+i)<<" ";
+    }
+    normalise(signal,n);
+    cout<< "------After Normalise------"<<endl;
+    for(int i = 0;i<n;i++){
+        cout<<*(signal+i)<<" ";
+    }
+    cout<<endl;
+    cout<<endl;
+    //APPLY GAIN
+    cout<< "------Before Gain------"<<endl;
+    for(int i = 0;i<n;i++){
+        cout<<*(signal+i)<<" ";
+    }
+    applyGain(signal,n,gainFactor);
+    cout<< "------After Gain------"<<endl;
+    for(int i = 0;i<n;i++){
+        cout<<*(signal+i)<<" ";
+    }
+
+    return 0;
+}
