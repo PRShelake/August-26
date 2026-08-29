@@ -1,0 +1,48 @@
+#include<iostream>
+using namespace std;
+
+void resetSensorPairV1(int reading1, int reading2){
+    int temp = reading1;
+    reading1 = reading2;
+    reading2 = temp;
+}
+
+void resetSensorPairV2(int& reading1, int& reading2){
+    int temp = reading1;
+    reading1 = reading2;
+    reading2 = temp;
+}
+
+void resetSensorPairV3(int *reading1, int *reading2){
+    int temp = *reading1;
+    *reading1 = *reading2;
+    *reading2 = temp;
+}
+
+int main(){
+
+    int reading1 , reading2;
+    cin>> reading1;
+    cin>> reading2;
+
+    cout<< "--- V1: Call by Value ---"<<endl;
+    cout<<"Before : A= " << reading1 << " B= " << reading2 <<endl;
+    resetSensorPairV1(reading1,reading2);
+    cout<<"After : A= " << reading1 << " B= " << reading2 <<endl;
+    //Here the values of A & B are originally printed because when we call the function the we pass the values and then 
+    // we catch the value there and there the copy of the numbers are created and then in the function scope the values are 
+    // exchanged but as our function is returning void we cannot catch here the values. Also the copy of that variables is made
+    // since its scope is for that function only so we cannot get the swapped values in main when we print them in the main so 
+    // in call by refrence the refrences are interchanged and in the call by address / pointer the actual values are exchanged 
+    // and the exchanged values are the visible in the main function because we have called the m using pointer. 
+    
+    cout<< "--- V1: Call by Refrence ---"<<endl;
+    cout<<"Before : A= " << reading1 << " B= " << reading2 <<endl;
+    resetSensorPairV2(reading1,reading2);
+    cout<<"After : A= " << reading1 << " B= " << reading2 <<endl;
+    
+    cout<< "--- V1: Call by Address/Pointer ---"<<endl;
+    cout<<"Before : A= " << reading1 << " B= " << reading2 <<endl;
+    resetSensorPairV3(&reading1,&reading2);
+    cout<<"After : A= " << reading1 << " B= " << reading2 <<endl;
+}
