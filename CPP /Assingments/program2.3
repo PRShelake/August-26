@@ -1,1 +1,57 @@
+#include<iostream>
+using namespace std;
 
+int main(){
+
+    int statusReg = 10; // Read-only from firmware side
+    int controlReg = 20; // Firmware writes here
+    int dataReg = 30; // For reassignment demo
+
+    // -- Pointer to constant
+    const int* regPtr1 = &statusReg;
+    cout<<"status Reg ->" << &statusReg << endl;
+    cout<< "regPtr1 -> " << regPtr1 << endl;
+    cout<< "regPtr1 -> " << *regPtr1 << endl;
+    regPtr1 = &controlReg;  // *Allowed* -> coz the defination says that we cannot change the value through the pointer 
+                            //but we can the address of the ptr so that the ptr can point to another variable
+    cout<< "regPtr1 ->" << regPtr1 << endl;
+    cout<< "regPtr1 ->" << *regPtr1 << endl;
+    
+    //regPtr1 = 10;         // *Not Allowed* -> coz we cannot change the value using this pointer as it is Pointer to 
+                            // constant and as the const says value cannot be changed once declared
+    
+
+
+
+    // -- Constant Pointer -- 
+    
+    int* const regPtr2 = &controlReg;  
+    cout<<"Control Reg ->" << &controlReg << endl;
+    cout<< "regPtr2 -> " << regPtr2 << endl;
+    cout<< "regPtr2 -> " << *regPtr2 << endl;
+
+    *regPtr2 = 100;     // *Allowed* -> coz constant pointer means the pointer will point at only one 
+                        // location so u can also change the data of there
+
+    cout<< "regPtr2 ->" << regPtr2 << endl;
+    cout<< "regPtr2 ->" << *regPtr2 << endl;
+
+    //regPtr2 = &statusReg;   //*Not Allowed* -> coz we are creating the const pointer that looks at only
+                            // location so the value there can be changed but the pointer cannot look 
+                            // to another address
+
+
+
+                            
+
+    // -- Const pointer to const variable
+    const int* const regPtr3 = &dataReg;
+    cout<<"Control Reg ->" << &dataReg << endl;
+    cout<< "regPtr2 -> " << regPtr3 << endl;
+    cout<< "regPtr2 -> " << *regPtr3 << endl;
+
+    //*regPtr3 = 110;           // *BOTH NOT ALLOWED* -> coz we are creating the const pointer to const variable
+    //*regPtr3 = &statusReg;    // so we can neither change the address of it neither change the value by using it;
+
+    return 0;
+}
