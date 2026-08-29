@@ -1,0 +1,37 @@
+#include<iostream>
+using namespace std;
+
+bool parsePacket(const int* rawData, int size,int** outMin, int** outMax){
+    int max = rawData[0];
+    int min = rawData[0];
+    if(size == 0){
+        return false;
+    }else{
+        for(int i = 0;i<size;i++){
+            if(rawData[i] < max){
+                max = rawData[i];
+            }
+            if(rawData[i] > min){
+                min = rawData[i];
+            }
+        }
+    }
+
+    *outMin = &min;
+    *outMax = &max;
+
+    return true;
+}
+
+int main(){
+
+    int packet[] = {45, 12, 67, 8, 55, 31};
+    int* minPtr = nullptr;
+    int* maxPtr = nullptr;
+    if (parsePacket(packet, 6, &minPtr, &maxPtr)) {
+        cout << "Calibration Min : " << *minPtr << endl;
+        cout << "Calibration Max : " << *maxPtr << endl;
+    }
+
+    return 0;
+}
