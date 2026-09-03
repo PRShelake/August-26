@@ -1,0 +1,64 @@
+
+#include <iostream>
+#include <memory>
+#include <string>
+
+using namespace std;
+
+class Shader
+{
+private:
+    string name;
+    string type;
+
+public:
+    // Constructor
+    Shader(string n, string t)
+    {
+        name = n;
+        type = t;
+
+        cout << "[Shader Compiled]" << endl;
+    }
+
+    // Destructor
+    ~Shader()
+    {
+        cout << "[Shader Destroyed]" << endl;
+    }
+
+    // Returns reference count
+    int getReferenceCount(const shared_ptr<Shader>& shader)
+    {
+        return shader.use_count();
+    }
+};
+
+int main()
+{
+    // 1. Create Shader using make_shared
+    auto shader = make_shared<Shader>("main_vert", "vertex");
+
+    // Reference count = 1
+    cout << "Ref count: " << shader.use_count() << endl;
+
+    {
+        // 2. Renderer shares the Shader
+        auto rendererRef = shader;
+
+        // Reference count = 2
+        cout << "Ref count: " << shader.use_count() << endl;
+
+        // 3. Editor also shares the Shader
+        auto editorRef = shader;
+
+        // Reference count = 3
+        cout << "Ref count: " << shader.use_count() << endl;
+    }
+
+    // rendererRef and editorRef are destroyed here.
+    // Reference count becomes 1
+    cout << "Ref count: " << shader.use_count() << endl;
+
+    return 0;
+}
