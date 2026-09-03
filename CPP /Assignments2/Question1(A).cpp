@@ -1,164 +1,131 @@
-#include<iostream>
+#include <iostream>
+#include <iomanip>
+#include <string>
 using namespace std;
 
-class IMS{
-    static int productId;
+class Product
+{
+private:
+    int productId;
     string name;
     double price;
     int quantity;
-    int thisID;
 
 public:
-    IMS(){
-        thisID = ++productId;
-    }
-    //setter
-    void setName (const string& n){
-        if(n != "" && n != " "){
-            name = n;
-        }
-        else{
-            cout<<"Name cannot be empty!"<<endl;
-        }
-    }
+    // Accept product details
+    void acceptDetails()
+    {
+        cout << "Enter Product ID: ";
+        cin >> productId;
 
-    void setPrice(double p){
-        price = p;
-    }
+        cout << "Enter Product Name: ";
+        cin >> name;
 
-    void setQuantity(int q){
-        if(q > 0){
-            quantity = q;
-        }
+        cout << "Enter Price: ";
+        cin >> price;
+
+        cout << "Enter Quantity: ";
+        cin >> quantity;
     }
 
-    
+    // Display product details
+    void displayDetails() const
+    {
+        cout << left << setw(8) << productId << setw(15) << name << setw(10) << fixed << setprecision(2) << price << setw(8) << quantity << setw(12) << totalValue();
 
-    //getter
-    int getQuantity()const {
-        return this->quantity;
-    }
-
-    string getName()const {
-        return name;
-    }
-    
-    double getPrice() const {
-        return this->price;
-    }
-
-    int getProductId() const {
-        return this->thisID;
-    }
-
-
-    void acceptDetails(){
-        // Read all fields from user
-     
-        string name;
-        double price;
-        int quantity;
-
-        cout<<"Enter the name!!"<<endl;
-        cin>>name;
-        setName(name);
-
-        cout<< "Enter the price!!" <<endl;
-        cin>>price;
-        if(price > 0){
-            setPrice(price);
-        }else{
-            cout<< "Enter the right price!!!"<<endl;
-        }
-        
-        cout<< "Enter the quantity!!" <<endl;
-        cin>>quantity;
-        setQuantity(quantity);
-
-    } 
-    void displayDetails(int threshold) const{
-        double price = getPrice();
-        int quantity = getQuantity();
-        double totalValue = totalValue1(price,quantity);
-
-        bool stock = isLowStock(threshold);
-
-        cout<<"===== INVENTORY REPORT ====="<<endl;
-        cout<<"ID \tName \tprice \tQty \tTotal Value"<<endl;
-        cout<<getProductId() << "\t" << getName() << "\t" <<price << "\t" << quantity << "\t" << totalValue << (stock?" \t\t<-LOW STOCK" : "") << endl ;
-
-    } // Print formatted product info
-    double totalValue1(double price , int quantity) const{
-        return price* quantity;
-
-    }
-        // price * quantity
-    bool isLowStock(int threshold) const{
-        int quantity = getQuantity();
-
-        if(quantity < threshold){
-            return true;
-        }else{
-            return false;
-        }
-    } // true if quantity < threshold
-
-    void highestValueProduct(IMS ims[] , int size){
-        int price = ims[0].getPrice();
-        int quantity = ims[0].getQuantity();
-        string productName = ims[0].getName();
-
-        int maxValue = price * quantity;
-
-        for(int i = 1 ; i<size ; i++){
-            price = ims[i].getPrice();
-            quantity = ims[i].getQuantity();
-            int totalValue = price * quantity;
-            if(totalValue > maxValue ){
-                maxValue = totalValue;
-                productName = ims[i].getName();
-            }
+        if (quantity < 10)
+        {
+            cout << "  LOW STOCK";
         }
 
-        cout<< "Highest Value Product : "<< productName <<" (Rs. "<< maxValue << " ) " <<endl;
-        
+        cout << endl;
     }
 
-    void lowStockThreshold(IMS ims[] , int size , int threshold){
-        cout<< "Low Stock (threshold: "<<threshold<<" ) : ";
-        for(int i = 0; i < size ; i++ ){
-            if(ims[i].getQuantity() <= threshold){
-                cout<< ims[i].getName() << " , ";
-            }
-        }
+    // Calculate total value
+    double totalValue() const
+    {
+        return price * quantity;
     }
 
+    // Check low stock
+    bool isLowStock(int threshold) const    //bool keyword means true of false; threshold => boundry stack
+    {
+        return quantity < threshold;
+    }
+
+    // Function to display highest value product
+    void displayHighestProduct() const     // this function donot any return value they provide only out
+    {
+        cout << name << " (Rs. " << fixed << setprecision(2) << totalValue() << ")" << endl; // fixed - its is used to display decimal number in standerd decimal format
+                                                                                             //  setprecision(2), example: 3.14322224 => 3.14
+    }
 };
 
-int IMS::productId = 1000;
+int main()
+{
+    // in this hear i make Array of 5 Product objects on stack
+    Product products[5]; //==>> products[0]; products[2]; products[2]; products[3]; products[4];
 
-int main(){
-    int size;
-    cout<<"Enter the size of the array : ";
-    cin>> size;
+    // Accept details
+    cout << "===== ENTER PRODUCT DETAILS =====" << endl;
 
+    for (int i = 0; i < 5; i++)
+    {
+        cout << "\nProduct " << i + 1 << endl;
+        products[i].acceptDetails();
+    }
+
+    // Display all products
+    cout << "\n\n===== INVENTORY REPORT =====" << endl;
+
+    cout << left << setw(8) << "ID" << setw(15) << "Name" << setw(10) << "Price"<< setw(8) << "Qty" << setw(12) << "Total Value"<< endl;
+
+    cout << "-------------------------------------------------------" << endl;
+
+    for (int i = 0; i < 5; i++)
+    {
+        products[i].displayDetails();
+    }
+
+    // Find product with highest total value
+    int highestIndex = 0;
+
+    for (int i = 1; i < 5; i++)
+    {
+        if (products[i].totalValue() >
+            products[highestIndex].totalValue())
+        {
+            highestIndex = i;
+        }
+    }
+
+    cout << "\nHighest Value Product: ";
+    products[highestIndex].displayHighestProduct();
+
+    // Get threshold
     int threshold;
-    cout<< "Enter the threshold : ";
-    cin>>threshold;
 
-    IMS ims[size];
+    cout << "\nEnter low stock threshold: ";
+    cin >> threshold;
 
-    for(int i = 0;i<size;i++){
-        cout<<"------- Enter the data for PRODUCT -------  " << i+1 << endl;
-        ims[i].acceptDetails();
+    // Display low stock products
+    cout << "\nLow Stock Products (threshold: "<< threshold << "):" << endl;
+
+    bool found = false;
+
+    for (int i = 0; i < 5; i++)
+    {
+        if (products[i].isLowStock(threshold))
+        {
+            products[i].displayDetails();
+            found = true;
+        }
     }
 
-    for(int i = 0;i<size;i++){
-        ims[i].displayDetails(threshold);
+    if (!found)
+    {
+        cout << "No products are below the threshold." << endl;
     }
 
-    IMS i1;
-    i1.highestValueProduct(ims , size);
-    i1.lowStockThreshold(ims,size,threshold);
     return 0;
 }
