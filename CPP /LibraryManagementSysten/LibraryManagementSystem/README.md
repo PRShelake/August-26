@@ -39,14 +39,7 @@ LibraryManagementSystem/
 │   ├── transactions.txt
 │   └── issued.txt
 │
-├── docs/
-│   └── LibraryManagementSystem.pdf
-│
 └── README.md
-
-📄 Project Documentation
-
-"View Project Documentation (PDF)" (docs/LibraryManagementSystem.pdf)
 
 ▶️ How to Run
 
@@ -65,6 +58,3 @@ The application stores library information in text files:
 - "transactions.txt" — Issue/return history
 - "issued.txt" — Currently issued books
 
-👨‍💻 Author
-
-Praveen Shelke
